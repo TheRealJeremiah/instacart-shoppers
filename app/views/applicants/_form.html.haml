@@ -1,0 +1,24 @@
+=form_for @applicant do |f|
+  .form-group
+    =f.label :first_name
+    =f.text_field(:first_name, class: 'form-control', placeholder: 'First name')
+  .form-group
+    =f.label :last_name
+    =f.text_field(:last_name, class: 'form-control', placeholder: 'Last name')
+  .form-group
+    =f.label :email
+    =f.text_field(:email, class: 'form-control', placeholder: 'example@test.com')
+  .form-group
+    =f.label :phone
+    =f.text_field(:phone, class: 'form-control', placeholder: '555 555 5555')
+  .form-group
+    %label{:for => "phoneType"} Select phone:
+    %select#phoneType.form-control{:name => "applicant[phone_type]"}
+      - Applicant::PHONE_TYPES.each do |phone|
+        %option #{phone}
+  .form-group
+    %label{:for => "region"} Select region:
+    %select#region.form-control{:name => "applicant[region]"}
+      - Applicant::REGIONS.each do |region|
+        %option #{region}
+  %button.btn.btn-default{:type => "submit"} Submit

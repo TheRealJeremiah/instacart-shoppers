@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-source 'https://rails-assets.org' 
+source 'https://rails-assets.org'
 
 gem 'rails', '4.2.0'
 gem 'sqlite3'
@@ -13,12 +13,15 @@ gem 'rails-assets-nvd3'
 gem 'bootstrap-sass'
 gem 'haml-rails'
 
-group :development do
+group :development, :test do
   gem 'better_errors'
   gem 'html2haml'
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'byebug'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'faker'
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
