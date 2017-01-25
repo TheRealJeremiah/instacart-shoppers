@@ -21,11 +21,12 @@ class ApplicantsController < ApplicationController
 
   def update
     @applicant = Applicant.find(params[:id])
-    if @applicant.update_attributes(article_params)
-      redirect_to action: 'index'
+    if @applicant.update_attributes(applicant_params)
+      flash.now[:notice] = 'Application updated!'
     else
-      render 'edit'
+      flash.now[:errors] = @applicant.errors.full_messages.join(', ')
     end
+    render 'edit'
   end
 
   def show
