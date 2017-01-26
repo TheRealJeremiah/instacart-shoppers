@@ -1,2 +1,27 @@
 .content
- =render 'form'
+  =form_for @applicant do |f|
+    .page-one
+      =render 'form', :f => f
+      %button.btn.btn-default{:id => "form-next", :type => "button"} Next
+    .page-two
+      Please confirm that you consent to a background check:
+      .checkbox
+        %label
+          %input{:type => "checkbox", :id => "background-check", :value => ""}>/
+          Confirm background check
+
+      %button.btn.btn-default{:id => "form-submit", :type => "submit"} Submit
+
+:javascript
+  $('#form-submit').prop('disabled', true);
+  $('#form-next').click(function () {
+    $('.page-one').hide()
+    $('.page-two').show()
+  })
+  $('#background-check').click(function () {
+    if (this.checked) {
+      $('#form-submit').prop('disabled', false);
+    } else {
+      $('#form-submit').prop('disabled', true);
+    }
+  })

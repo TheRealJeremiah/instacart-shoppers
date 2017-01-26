@@ -1,2 +1,4 @@
 .content
- =render 'form'
+  =form_for @applicant do |f|
+    =render 'form', :f => f
+    %button.btn.btn-default{:id => "form-submit", :type => "submit"} Submit
