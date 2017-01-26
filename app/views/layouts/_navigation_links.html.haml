@@ -1,2 +1,7 @@
 %li
   = link_to 'Funnel Analytics', funnels_path
+%li
+  - if logged_in?
+    = link_to 'Edit your application', edit_applicant_path(current_applicant)
+  - else
+    = link_to 'Login to edit your application', new_session_path

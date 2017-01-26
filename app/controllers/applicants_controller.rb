@@ -1,4 +1,6 @@
 class ApplicantsController < ApplicationController
+  before_action :require_login, only: [:edit, :update]
+
   def new
     @applicant = Applicant.new
   end
@@ -8,6 +10,7 @@ class ApplicantsController < ApplicationController
     @applicant.workflow_state = 'applied'
     if @applicant.save
       flash[:notice] = 'Application submitted! Edit you application below'
+      login_applicant @applicant
       redirect_to action: 'edit', id: @applicant
     else
       flash.now[:errors] = @applicant.errors.full_messages.join(', ')
@@ -17,6 +20,7 @@ class ApplicantsController < ApplicationController
 
   def edit
     @applicant = Applicant.find(params[:id])
+    redirect_to(new_session_path) unless @applicant == current_applicant
   end
 
   def update
@@ -38,5 +42,9 @@ class ApplicantsController < ApplicationController
   def applicant_params
     params.require(:applicant).permit(:first_name, :last_name, :email, :phone,
                                       :phone_type, :workflow_state, :region)
+  end
+
+  def require_login
+    redirect_to(new_applicant_path) unless logged_in?
   end
 end
